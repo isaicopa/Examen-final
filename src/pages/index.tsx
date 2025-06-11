@@ -6,6 +6,10 @@ import {
   Task,
 } from "@/conceptos-react/3-renderizado-condicional/Tarea";
 import { ListaCientificos } from "@/conceptos-react/4-renderizado-listas/ListaCientificos";
+import Contador from "@/conceptos-react/5-hooks/1-useState/Contador";
+import PerfilUsuario from "@/conceptos-react/5-hooks/1-useState/PerfilUsuario";
+import Concepto from "@/conceptos-react/5-hooks/2-useEffect/Concepto";
+import ListaRecetas from "@/conceptos-react/5-hooks/2-useEffect/ListaRecetas";
 import React from "react";
 
 const Home = () => {
@@ -30,6 +34,12 @@ const Home = () => {
       </ul>
       <h1>Renderizado de listas</h1>
       <ListaCientificos />
+      <h1>useState</h1>
+      <Contador />
+      <PerfilUsuario />
+      <h1>useEffect</h1>
+      <Concepto />
+      <ListaRecetas />
     </div>
   );
 };

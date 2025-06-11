@@ -38,3 +38,35 @@
   font-size: 1rem;
   color: #666;
 }
+
+.card-receta {
+  width: 280px;
+  padding: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  margin: 16px auto;
+}
+
+.card-receta__info {
+  padding: 8px 0;
+}
+
+.card-receta__image {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.card-receta__titulo {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.card-receta__descripcion {
+  margin: 0;
+  font-size: 1rem;
+  color: #666;
+}
