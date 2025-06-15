@@ -12,7 +12,7 @@ const ListaRecetas = () => {
   const [recetas, setRecetas] = useState<RecetaType[]>([]);
 
   useEffect(() => {
-    fetch("https://dummyjson.com/recipes")
+    fetch("https://dummyjson.com/recipes?limit=12")
       .then((res) => res.json())
       .then((datos) => {
         console.log(datos);
@@ -22,7 +22,6 @@ const ListaRecetas = () => {
 
   return (
     <div>
-      <h1>ListaRecetas</h1>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {recetas.map((receta) => {
           return (

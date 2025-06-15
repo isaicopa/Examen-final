@@ -1,8 +1,8 @@
 import { Header2 } from "@/conceptos-react/1-componente-funcional/ComponenteFuncional";
 import { Perfil } from "@/conceptos-react/2-uso-propiedades/Perfil";
 import {
-  Item,
   Tarea,
+  Item,
   Task,
 } from "@/conceptos-react/3-renderizado-condicional/Tarea";
 import { ListaCientificos } from "@/conceptos-react/4-renderizado-listas/ListaCientificos";
@@ -10,9 +10,25 @@ import Contador from "@/conceptos-react/5-hooks/1-useState/Contador";
 import PerfilUsuario from "@/conceptos-react/5-hooks/1-useState/PerfilUsuario";
 import Concepto from "@/conceptos-react/5-hooks/2-useEffect/Concepto";
 import ListaRecetas from "@/conceptos-react/5-hooks/2-useEffect/ListaRecetas";
-import React from "react";
+import HeaderTareas from "@/conceptos-react/5-hooks/3-estado-por-paso-propiedades/HeaderTareas";
+import ListaTareas from "@/conceptos-react/5-hooks/3-estado-por-paso-propiedades/ListaTareas";
+import HeaderTareas2 from "@/conceptos-react/5-hooks/4-useContext/HeaderTareas";
+import ListaTareas2 from "@/conceptos-react/5-hooks/4-useContext/ListaTareas";
+import { useState } from "react";
+
+export interface TareaType {
+  nombre: string;
+  completada: boolean;
+}
 
 const Home = () => {
+  const [tareas, setTareas] = useState<TareaType[]>([]);
+  const cantidadTareas = tareas.length;
+
+  const agregarTarea = (tarea: TareaType) => {
+    setTareas([...tareas, tarea]);
+  };
+
   return (
     <div>
       <Header2 />
@@ -40,6 +56,13 @@ const Home = () => {
       <h1>useEffect</h1>
       <Concepto />
       <ListaRecetas />
+      <h1>Compartir estado con props</h1>
+      <HeaderTareas cantidadTareas={cantidadTareas} />
+      <ListaTareas tareas={tareas} agregarTarea={agregarTarea} />
+      <h1>useContext</h1>
+      <HeaderTareas2 />
+      <ListaTareas2 />
+      <div style={{ height: "100px" }} />
     </div>
   );
 };
