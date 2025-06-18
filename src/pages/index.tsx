@@ -1,4 +1,6 @@
-import { Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/router";
+// import Link from "next/link";
 
 export interface TareaType {
   nombre: string;
@@ -6,12 +8,17 @@ export interface TareaType {
 }
 
 const Home = () => {
+  const router = useRouter();
   return (
-    <div>
-      <Typography variant="h1" align="center">
+    <Box style={{ textAlign: "center" }}>
+      <Typography variant="h1" align="center" gutterBottom>
         Curso de React con TypeScript v3.0
       </Typography>
-    </div>
+      <Button variant="contained" onClick={() => router.push("/productos")}>
+        Ir a productos
+      </Button>
+      {/* <Link href="/productos">Navegar a productos</Link> */}
+    </Box>
   );
 };
 
