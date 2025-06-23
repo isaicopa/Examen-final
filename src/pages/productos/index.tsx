@@ -1,13 +1,8 @@
+import MainLayout from "@/components/layouts/MainLayout";
 import CardProducto from "@/modules/producto/components/CardProducto";
 import { ProductType } from "@/modules/producto/types/productTypes";
-import {
-  Box,
-  Container,
-  Pagination,
-  Stack,
-  Typography,
-  TextField,
-} from "@mui/material";
+import { Box, Pagination, Stack, Typography, TextField } from "@mui/material";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const DEFAULT_LIMIT = 10;
@@ -40,6 +35,8 @@ const Productos = () => {
 
   const [busqueda, setBusqueda] = useState("");
 
+  const router = useRouter();
+
   useEffect(() => {
     const skip = calcularSkip(pagina, DEFAULT_LIMIT);
 
@@ -62,7 +59,7 @@ const Productos = () => {
   }, [pagina, busqueda]);
 
   return (
-    <Container maxWidth={"xl"}>
+    <MainLayout titulo="Productos">
       <Box my={4}>
         <TextField
           id="buscarProducto"
@@ -88,7 +85,13 @@ const Productos = () => {
         <>
           <Stack spacing={4}>
             {productos.map((producto) => (
-              <CardProducto key={producto.id} producto={producto} />
+              <CardProducto
+                key={producto.id}
+                producto={producto}
+                onClick={(id) => {
+                  router.push(`/productos/${id}`);
+                }}
+              />
             ))}
           </Stack>
           <Box
@@ -107,7 +110,7 @@ const Productos = () => {
           </Box>
         </>
       )}
-    </Container>
+    </MainLayout>
   );
 };
 
