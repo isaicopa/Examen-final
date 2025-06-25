@@ -1,4 +1,4 @@
-import TareasProvider from "@/conceptos-react/5-hooks/4-useContext/TareasProvider";
+import CarritoProvider from "@/context/CarritoProvider";
 import "@/styles/globals.css";
 import { CssBaseline } from "@mui/material";
 import type { AppProps } from "next/app";
@@ -11,10 +11,10 @@ const geist = Geist({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={geist.className}>
-      <TareasProvider>
+      <CarritoProvider>
         <CssBaseline />
         <Component {...pageProps} />
-      </TareasProvider>
+      </CarritoProvider>
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import MainLayout from "@/components/layouts/MainLayout";
+import { useCarrito } from "@/hooks/useCarrito";
 import CardProducto from "@/modules/producto/components/CardProducto";
 import { ProductType } from "@/modules/producto/types/productTypes";
 import { Box, Pagination, Stack, Typography, TextField } from "@mui/material";
@@ -36,6 +37,8 @@ const Productos = () => {
   const [busqueda, setBusqueda] = useState("");
 
   const router = useRouter();
+
+  const { agregarProducto } = useCarrito();
 
   useEffect(() => {
     const skip = calcularSkip(pagina, DEFAULT_LIMIT);
@@ -90,6 +93,15 @@ const Productos = () => {
                 producto={producto}
                 onClick={(id) => {
                   router.push(`/productos/${id}`);
+                }}
+                onAddToCart={(producto) => {
+                  agregarProducto({
+                    id: producto.id,
+                    title: producto.title,
+                    price: producto.price,
+                    image: producto.thumbnail,
+                    quantity: 1,
+                  });
                 }}
               />
             ))}

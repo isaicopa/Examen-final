@@ -5,7 +5,6 @@ import {
   Typography,
   Rating,
   Button,
-  CardActionArea,
 } from "@mui/material";
 import React from "react";
 import { ProductType } from "../types/productTypes";
@@ -13,9 +12,14 @@ import { ProductType } from "../types/productTypes";
 interface CardProductoProps {
   producto: ProductType;
   onClick: (idProducto: number) => void;
+  onAddToCart: (producto: ProductType) => void;
 }
 
-const CardProducto = ({ producto, onClick }: CardProductoProps) => {
+const CardProducto = ({
+  producto,
+  onClick,
+  onAddToCart,
+}: CardProductoProps) => {
   return (
     <Card variant="outlined" sx={{ display: "flex", gap: 1, borderRadius: 2 }}>
       <Box
@@ -58,7 +62,9 @@ const CardProducto = ({ producto, onClick }: CardProductoProps) => {
           ${producto.price}
         </Typography>
         <Typography variant="body2">{producto.warrantyInformation}</Typography>
-        <Button variant="contained">Add to cart</Button>
+        <Button variant="contained" onClick={() => onAddToCart(producto)}>
+          Add to cart
+        </Button>
       </CardContent>
     </Card>
   );

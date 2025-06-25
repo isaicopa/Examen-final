@@ -13,6 +13,7 @@ import HeaderTareas2 from "./5-hooks/4-useContext/HeaderTareas";
 import ListaTareas2 from "./5-hooks/4-useContext/ListaTareas";
 import { Button } from "@mui/material";
 import { TareaType } from "@/pages";
+import TareasProvider from "./5-hooks/4-useContext/TareasProvider";
 
 const ConceptosReact = () => {
   const [tareas, setTareas] = useState<TareaType[]>([]);
@@ -52,8 +53,10 @@ const ConceptosReact = () => {
       <HeaderTareas cantidadTareas={cantidadTareas} />
       <ListaTareas tareas={tareas} agregarTarea={agregarTarea} />
       <h1>useContext</h1>
-      <HeaderTareas2 />
-      <ListaTareas2 />
+      <TareasProvider>
+        <HeaderTareas2 />
+        <ListaTareas2 />
+      </TareasProvider>
       <Button variant="contained">Comprar producto</Button>
       <div style={{ height: "100px" }} />
     </div>
