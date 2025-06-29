@@ -1,4 +1,5 @@
 import CarritoProvider from "@/context/CarritoProvider";
+import SearchProvider from "@/context/SearchProvider";
 import "@/styles/globals.css";
 import { CssBaseline } from "@mui/material";
 import type { AppProps } from "next/app";
@@ -12,8 +13,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <div className={geist.className}>
       <CarritoProvider>
-        <CssBaseline />
-        <Component {...pageProps} />
+        <SearchProvider>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </SearchProvider>
       </CarritoProvider>
     </div>
   );

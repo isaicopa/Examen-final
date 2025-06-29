@@ -1,8 +1,9 @@
 import MainLayout from "@/components/layouts/MainLayout";
+import { useBusqueda } from "@/hooks/useBusqueda";
 import { useCarrito } from "@/hooks/useCarrito";
 import CardProducto from "@/modules/producto/components/CardProducto";
 import { ProductType } from "@/modules/producto/types/productTypes";
-import { Box, Pagination, Stack, Typography, TextField } from "@mui/material";
+import { Box, Pagination, Stack, Typography } from "@mui/material";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
@@ -34,11 +35,10 @@ const Productos = () => {
   const [pagina, setPagina] = useState(DEFAULT_PAGE);
   const [totalPaginas, setTotalPaginas] = useState(0);
 
-  const [busqueda, setBusqueda] = useState("");
-
   const router = useRouter();
 
   const { agregarProducto } = useCarrito();
+  const { busqueda } = useBusqueda();
 
   useEffect(() => {
     const skip = calcularSkip(pagina, DEFAULT_LIMIT);
@@ -63,18 +63,6 @@ const Productos = () => {
 
   return (
     <MainLayout titulo="Productos">
-      <Box my={4}>
-        <TextField
-          id="buscarProducto"
-          variant="outlined"
-          placeholder="Buscar producto"
-          fullWidth
-          onChange={(e) => {
-            setPagina(DEFAULT_PAGE);
-            setBusqueda(e.target.value);
-          }}
-        />
-      </Box>
       <Box mb={4}>
         <Typography variant="subtitle1" fontWeight={"bold"}>
           Results

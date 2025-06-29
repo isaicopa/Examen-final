@@ -4,7 +4,10 @@ import { createContext, ReactNode, useState } from "react";
 interface CarritoContextType {
   carritoProductos: CartProductType[];
   totalProductos: number;
+  precioTotal: string;
   agregarProducto: (producto: CartProductType) => void;
+  actualizarCantidad: (idProducto: number, cantidad: number) => void;
+  eliminarProducto: (idProducto: number) => void;
 }
 
 export const CarritoContext = createContext<CarritoContextType | undefined>(
@@ -22,6 +25,11 @@ const CarritoProvider = ({ children }: Props) => {
 
   const totalProductos = carritoProductos.reduce(
     (total, producto) => total + producto.quantity,
+    0
+  );
+
+  const precioTotal = carritoProductos.reduce(
+    (total, producto) => total + producto.price * producto.quantity,
     0
   );
 
@@ -46,10 +54,35 @@ const CarritoProvider = ({ children }: Props) => {
     });
   };
 
+  const actualizarCantidad = (idProducto: number, cantidad: number) => {
+    setCarritoProductos((productos) => {
+      const listaActualizada = productos.map((p) => {
+        if (p.id === idProducto) {
+          return {
+            ...p,
+            quantity: cantidad,
+          };
+        }
+        return p;
+      });
+      return listaActualizada;
+    });
+  };
+
+  const eliminarProducto = (idProducto: number) => {
+    const listaActualizada = carritoProductos.filter(
+      (producto) => producto.id !== idProducto
+    );
+    setCarritoProductos(listaActualizada);
+  };
+
   const contexto: CarritoContextType = {
     carritoProductos,
     totalProductos,
+    precioTotal: precioTotal.toFixed(2),
     agregarProducto,
+    actualizarCantidad,
+    eliminarProducto,
   };
 
   return <CarritoContext value={contexto}>{children}</CarritoContext>;

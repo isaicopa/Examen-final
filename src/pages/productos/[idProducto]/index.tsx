@@ -1,4 +1,5 @@
 import MainLayout from "@/components/layouts/MainLayout";
+import { useCarrito } from "@/hooks/useCarrito";
 import { ProductType } from "@/modules/producto/types/productTypes";
 import {
   Box,
@@ -6,13 +7,29 @@ import {
   Card,
   CardContent,
   Divider,
+  FormControl,
   Grid,
+  MenuItem,
   Rating,
+  Select,
   Stack,
   Typography,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+
+const cantidades = [
+  { value: 1, label: "1" },
+  { value: 2, label: "2" },
+  { value: 3, label: "3" },
+  { value: 4, label: "4" },
+  { value: 5, label: "5" },
+  { value: 6, label: "6" },
+  { value: 7, label: "7" },
+  { value: 8, label: "8" },
+  { value: 9, label: "9" },
+  { value: 10, label: "10" },
+];
 
 const REFERENCE_LOW_STOCK = 5;
 
@@ -22,6 +39,10 @@ const DetalleProducto = () => {
 
   const [producto, setProducto] = useState<ProductType | null>(null);
   const [loading, setLoading] = useState(false);
+
+  const [cantidad, setCantidad] = useState(1);
+
+  const { agregarProducto } = useCarrito();
 
   useEffect(() => {
     if (!idProducto) return;
@@ -136,7 +157,35 @@ const DetalleProducto = () => {
                   <Typography color="success" fontWeight={"bold"}>
                     {producto.availabilityStatus}
                   </Typography>
-                  <Button variant="contained" color="secondary">
+                  <FormControl fullWidth>
+                    <Select
+                      id="cantidadProducto"
+                      size="small"
+                      value={cantidad}
+                      onChange={(e) => {
+                        setCantidad(e.target.value as number);
+                      }}
+                    >
+                      {cantidades.map((cantidad) => (
+                        <MenuItem key={cantidad.value} value={cantidad.value}>
+                          {cantidad.label}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => {
+                      agregarProducto({
+                        id: producto.id,
+                        title: producto.title,
+                        price: producto.price,
+                        image: producto.thumbnail,
+                        quantity: cantidad,
+                      });
+                    }}
+                  >
                     Add to cart
                   </Button>
                   <Button variant="contained">Buy Now</Button>

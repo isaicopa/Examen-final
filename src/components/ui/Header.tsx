@@ -1,30 +1,24 @@
-import { Box, AppBar, Toolbar, IconButton, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import React from "react";
-import IconoCarrito from "@/modules/carrito/components/IconoCarrito";
+import { useBusqueda } from "@/hooks/useBusqueda";
 import { useCarrito } from "@/hooks/useCarrito";
+import IconoCarrito from "@/modules/carrito/components/IconoCarrito";
+import { AppBar, Box, Toolbar, Typography } from "@mui/material";
+import SearchBar from "./SearchBar";
 
 const Header = () => {
   const { totalProductos } = useCarrito();
+  const { actualizarBusqueda } = useBusqueda();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Ecommerce App
-          </Typography>
-          <Box mr={50}>
-            <IconoCarrito cantidad={totalProductos} />
+        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Box display={"flex"} alignItems={"center"}>
+            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              Ecommerce App
+            </Typography>
           </Box>
+          <SearchBar onSearch={actualizarBusqueda} />
+          <IconoCarrito cantidad={totalProductos} />
         </Toolbar>
       </AppBar>
     </Box>
