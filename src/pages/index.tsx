@@ -1,23 +1,14 @@
-import { Box, Button, Typography } from "@mui/material";
+// src/pages/index.tsx
 import { useRouter } from "next/router";
-// import Link from "next/link";
-
-export interface TareaType {
-  nombre: string;
-  completada: boolean;
-}
+import HomePage from "@/components/HomePage";
+import { Typography, Box, Button } from "@mui/material";
 
 const Home = () => {
   const router = useRouter();
+
   return (
     <Box style={{ textAlign: "center" }}>
-      <Typography variant="h1" align="center" gutterBottom>
-        Curso de React con TypeScript v3.0
-      </Typography>
-      <Button variant="contained" onClick={() => router.push("/productos")}>
-        Ir a productos
-      </Button>
-      {/* <Link href="/productos">Navegar a productos</Link> */}
+      <HomePage></HomePage>
     </Box>
   );
 };
